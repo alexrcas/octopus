@@ -9,7 +9,7 @@ Se propone una solución muy común en el mundo del IoT (Internet of Things), ba
 
 ![general](doc/resources/general.drawio.png)
 
-Octopus es un sistema completo compuesto por todas las piezas necesarias para su funcionamiento: un servidor web, una base de datos y un broker MQTT, necesario para el uso de este protocolo y un servidor Node-Red. Todos estos componentes son englobados usando como abstracción la tecnología de contenerización, reduciendo al mínimo los problemas de portabilidad, compatibilidad y despliegue.
+Octopus es un sistema completo compuesto por todas las piezas necesarias para su funcionamiento: un servidor web, una base de datos, un broker MQTT y un servidor Node-Red. Todos estos componentes son englobados usando como abstracción la tecnología de contenerización, reduciendo al mínimo los problemas de portabilidad, compatibilidad y despliegue.
 
 ![octopus](doc/resources/octopus.drawio.png)
 
