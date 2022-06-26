@@ -7,7 +7,7 @@
 Se propone una solución muy común en el mundo del IoT (Internet of Things), basada en el protocolo MQTT y el patrón publicador/suscriptor. Los diferentes dispositivos inteligentes se comunicarán a través de este protocolo con Octopus.
 
 [Comentar el por qué de la decisión]
-[Hablar de seguridad]
+
 
 ![general](doc/resources/general.drawio.png)
 
@@ -35,6 +35,20 @@ oficina/servidores/servidor1/temperatura
 oficina/reuniones/aire/rpm
 oficina/servidores/luz/brillo
 ```
+
+### Aspectos de Seguridad
+
+* Para la comunicación HTTP, se implementarán los mecanismos típicos de autenticación, autorización y cifrado comunes en cualquier aplicación web.
+* La comunicación MQTT podrá también ser securizada mediante los diferentes mecanismos que ofrece el *Mosquitto*: cifrado SSL, autenticación y autorización mediante usuario/contraseña y listas de control de acceso.
+
+
+## Tecnologías empleadas
+
+* Docker y Docker-Compose como tecnología de virtualización.
+* Mosquitto como Broker MQTT.
+* Postgre como Base de datos.
+* Python (Flask) como framework para el desarrollo del servidor web debido a su facilidad y velocidad de desarrollo. Tras una primera prueba de concepto puede valorarse Spring Boot.
+
 
 ## Arrancar el proyecto
 
@@ -76,5 +90,7 @@ python app.py
 
 
 #### Probando el proyecto
-Una vez está todo arrancado, si se accede a `http://localhost:5000` debería visualizarse una página de muestra con datos falsos.
+Una vez está todo arrancado, si se accede a `http://localhost:5000` debería visualizarse el portal web.
 En el proyecto existe un fichero `src/client.py` que simula dos clientes que envían datos. Si se abre una segunda terminal (recordar activar el entorno virtual) y se lanza este script, los datos en el panel web deberían comenzar a oscilar en tiempo real.
+
+![](doc/resources/ejemplo.gif)
