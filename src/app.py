@@ -23,16 +23,10 @@ def handle_connect(client, userdata, flags, rc):
     mqtt.subscribe('oficina/#')
 
 
-@mqtt.on_topic('oficina/reuniones/luz/brillo')
+@mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
     payload = message.payload.decode()
-    socketio.emit('oficina/reuniones/luz/brillo', json.loads(payload))
-
-
-@mqtt.on_topic('oficina/servidores/servidor1/temperatura')
-def handle_mqtt_message(client, userdata, message):
-    payload = message.payload.decode()
-    socketio.emit('oficina/servidores/servidor1/temperatura', json.loads(payload))
+    socketio.emit(message.topic, json.loads(payload))
 
 
 @mqtt.on_log()
