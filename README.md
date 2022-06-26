@@ -6,14 +6,14 @@
 
 Se propone una solución muy común en el mundo del IoT (Internet of Things), basada en el protocolo MQTT y el patrón publicador/suscriptor. Los diferentes dispositivos inteligentes se comunicarán a través de este protocolo con Octopus.
 
-[Comentar el por qué de la decisión]
-
 
 ![general](doc/resources/general.drawio.png)
 
 Octopus es un sistema completo compuesto por todas las piezas necesarias para su funcionamiento: un servidor web, una base de datos y un broker MQTT, necesario para el uso de este protocolo y un servidor Node-Red. Todos estos componentes son englobados usando como abstracción la tecnología de contenerización, reduciendo al mínimo los problemas de portabilidad, compatibilidad y despliegue.
 
 ![octopus](doc/resources/octopus.drawio.png)
+
+**Nota**: Estos diagramas muestran como sería el proyecto desplegado en su versión para explotación. En la versión de desarrollo el servidor web no está contenerizado o la base de datos está expuesta al exterior por motivos de agilidad.
 
 Así, a efectos de uso, Octopus es una "caja negra". Únicamente debe crearse y arrancar el contenedor con un solo comando. Una vez hecho, el sistema está listo para comunicar a los diferentes clientes IoT que se conecten y sus servidores web y Node-Red están accesibles.
 
@@ -23,9 +23,9 @@ De manera interna, Octopus está compuesto por diferentes sistemas contenerizado
 
 ![arquitectura](doc/resources/arquitectura.png)
 
-### Sobre Node-Red
+### Node-Red vs Servidor Web propio
 
-Node-RED es un motor de flujos con enfoque IoT, que permite definir gráficamente flujos de servicios. Aún no está claro cuánto brinda Node-RED con respecto a una implementación propia. Por ello, aún no está claro cuánta parte de trabajo caerá sobre Node-RED y cuánta sobre el servidor web propio. Si Node-RED brindase toda la potencia y flexibilidad necesarias tal vez el servidor web podría desaparecer. O quizá lo adecuado sea optar por una solución intermedia utilizando Node-RED para ciertas tareas y el backoffice para visualizar o configurar ciertas opciones, o puede que que Node-RED se muestre poco ventajoso y se opte por una implementación completamente propia. Son incertidumbres que resolverá la experimentación y la formación.
+Node-RED es un motor de flujos con enfoque IoT, que permite definir gráficamente flujos de servicios. Aún no está claro cuánto brinda Node-RED con respecto a una implementación propia. Por ello, aún no está claro cuánta parte de trabajo caerá sobre Node-RED y cuánta sobre el servidor web propio. Si Node-RED brindase toda la potencia y flexibilidad necesarias (ya que puede incluso producir APIs y escribir en base de datos) el servidor web podría llegar a desaparecer. O quizá se descubra que lo adecuado sea optar por una solución intermedia utilizando Node-RED para ciertas tareas como el envío de notificaciones y el backoffice para visualizar o configurar ciertas opciones, o puede que Node-RED se muestre poco ventajoso y se opte por una implementación completamente propia. Son incertidumbres que resolverá la experimentación y la formación.
 
 ![](doc/resources/nodered.png)
 
@@ -65,6 +65,15 @@ El ecosistema se ofrece dockerizado y orquestado por *Docker Compose*, por lo qu
 docker-compose up
 ```
 
+Eso es todo lo necesario para levantar el ecosistema:
+* Mosquitto estará disponible en `localhost:1883`
+* El panel web de Node-Red estará disponible bajo `localhost:1880`
+* La base de datos estará disponible bajo `localhost:5432`
+
+![](doc/resources/compose.png)
+
+Cabe recordar que Docker-Compose organiza su networking interno por el nombre de los servicios (pueden verse en el fichero `docker-compose.yaml`). Esto significa que si desde el contenedor de Node-Red se quiere por ejemplo alcanzar a *Mosquitto*, este será visible bajo la dirección `mosquitto:1883`, o si desde *Mosquitto* se quisiera conectar a la base de datos esta se resolvería con `postgre:5432`.
+
 ### Consideraciones importantes sobre *Mosquitto*
 
 Hay dos ficheros de *Mosquitto* que es necesario mencionar:
@@ -86,14 +95,6 @@ Una vez instaladas las dependencias, ejecutar el servidor:
 ```
 python app.py
 ```
-
-#### Ejemplo concreto de pasos a seguir para arrancar el proyecto:
-1. Descargar el proyecto y situarlo en el Escritorio.
-2. Crear un entorno virtual en el escritorio con `python -m virtualenv mientorno` (el comando puede variar ligeramente según el sistema y la forma de instalar virtualenv).
-3. Mover la carpeta del proyecto a la carpeta `mientorno` que habrá creado el paso 2.
-4. Situarse en el directorio `mientorno` y activar el entorno virtual (es un comando simple pero varía según el sistema, consultar documentación).
-5. Moverse dentro de la carpeta del proyecto descargado y ejecutar `docker-compose up`.
-6. Moverse al directorio `src`, ejecutar `pip install requirements.txt` y posteriormente `python app.py`.
 
 
 #### Probando el proyecto
