@@ -11,17 +11,23 @@ Se propone una solución muy común en el mundo del IoT (Internet of Things), ba
 
 ![general](doc/resources/general.drawio.png)
 
-Octopus es un sistema completo compuesto por todas las piezas necesarias para su funcionamiento: un servidor web, una base de datos y un broker MQTT, necesario para el uso de este protocolo. Todos estos componentes son englobados usando como abstracción la tecnología de contenerización, reduciendo al mínimo los problemas de portabilidad, compatibilidad y despliegue.
+Octopus es un sistema completo compuesto por todas las piezas necesarias para su funcionamiento: un servidor web, una base de datos y un broker MQTT, necesario para el uso de este protocolo y un servidor Node-Red. Todos estos componentes son englobados usando como abstracción la tecnología de contenerización, reduciendo al mínimo los problemas de portabilidad, compatibilidad y despliegue.
 
 ![octopus](doc/resources/octopus.drawio.png)
 
-Así, a efectos de uso, Octopus es una "caja negra". Únicamente debe crearse y arrancar el contenedor con un solo comando. Una vez hecho, el sistema está listo para comunicar a los diferentes clientes IoT que se conecten, su backoffice web es accesible y su API REST está lista para ser consumida.
+Así, a efectos de uso, Octopus es una "caja negra". Únicamente debe crearse y arrancar el contenedor con un solo comando. Una vez hecho, el sistema está listo para comunicar a los diferentes clientes IoT que se conecten y sus servidores web y Node-Red están accesibles.
 
 ![sistema-final](doc/resources/sistema-final.drawio.png)
 
-De manera interna, Octopus está compuesto por diferentes sistemas contenerizados que se comunican entre sí o son expuestos al exterior si es necesario. En principio, la base de datos no es expuesta y será accedida o manipulada a través del servidor web.
+De manera interna, Octopus está compuesto por diferentes sistemas contenerizados que se comunican entre sí o son expuestos al exterior si es necesario.
 
 ![arquitectura](doc/resources/arquitectura.png)
+
+### Sobre Node-Red
+
+Node-RED es un motor de flujos con enfoque IoT, que permite definir gráficamente flujos de servicios. Aún no está claro cuánto brinda Node-RED con respecto a una implementación propia. Por ello, aún no está claro cuánta parte de trabajo caerá sobre Node-RED y cuánta sobre el servidor web propio. Si Node-RED brindase toda la potencia y flexibilidad necesarias tal vez el servidor web podría desaparecer. O quizá lo adecuado sea optar por una solución intermedia utilizando Node-RED para ciertas tareas y el backoffice para visualizar o configurar ciertas opciones, o puede que que Node-RED se muestre poco ventajoso y se opte por una implementación completamente propia. Son incertidumbres que resolverá la experimentación y la formación.
+
+![](doc/resources/nodered.png)
 
 
 Formato de los topics:
@@ -47,6 +53,7 @@ oficina/servidores/luz/brillo
 * Docker y Docker-Compose como tecnología de virtualización.
 * Mosquitto como Broker MQTT.
 * Postgre como Base de datos.
+* Node-Red como motor de flujos.
 * Python (Flask) como framework para el desarrollo del servidor web debido a su facilidad y velocidad de desarrollo. Tras una primera prueba de concepto puede valorarse Spring Boot.
 
 
