@@ -1,8 +1,8 @@
 # Octopus
 
-## Descripción funcional del proyecto
+Octopus es un sistema de monitorización y comunicación entre dispositivos inteligentes.
 
-## Descripción técnica del proyecto
+## Descripción del proyecto
 
 Se propone una solución muy común en el mundo del IoT (Internet of Things), basada en el protocolo MQTT y el patrón publicador/suscriptor. Los diferentes dispositivos inteligentes se comunicarán a través de este protocolo con Octopus.
 
@@ -42,10 +42,18 @@ oficina/reuniones/aire/rpm
 oficina/servidores/luz/brillo
 ```
 
-### Aspectos de Seguridad
+### Consideraciones de Seguridad
 
 * Para la comunicación HTTP, se implementarán los mecanismos típicos de autenticación, autorización y cifrado comunes en cualquier aplicación web.
 * La comunicación MQTT podrá también ser securizada mediante los diferentes mecanismos que ofrece el *Mosquitto*: cifrado SSL, autenticación y autorización mediante usuario/contraseña y listas de control de acceso.
+
+### Consideraciones de rendimiento
+
+MQTT es un protocolo muy ligero. La naturaleza de los proyectos IoT se basa en una monitorización en tiempo real y una respuesta rápida de los diferentes dispositivos involucrados. Por ello, se opta por la siguiente consideración a nivel de arquitectura:
+
+![](doc/resources/interaccion.drawio.png)
+
+Los clientes pueden atacar al backoffice para listar los dispositivos o tópicos disponibles para suscribirse, pero los datos en sí serán transmitidos directamente por MQTT. Por defecto, se recibirán numerosos mensajes por segundo, multiplicados por cada dispositivo. Involucrar de alguna manera al protocolo HTTP o consultas a la base de datos por cada una de estas peticiones sería altamente ineficiente, por lo que estas interacciones deben estudiarse bien.
 
 
 ## Tecnologías empleadas
