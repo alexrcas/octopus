@@ -25,7 +25,7 @@ De manera interna, Octopus está compuesto por diferentes sistemas contenerizado
 
 ### Node-Red vs Servidor Web propio
 
-Node-RED es un motor de flujos con enfoque IoT, que permite definir gráficamente flujos de servicios. Aún no está claro cuánto brinda Node-RED con respecto a una implementación propia. Por ello, aún no está claro cuánta parte de trabajo caerá sobre Node-RED y cuánta sobre el servidor web propio. Si Node-RED brindase toda la potencia y flexibilidad necesarias (ya que puede incluso producir APIs y escribir en base de datos) el servidor web podría llegar a desaparecer. O quizá se descubra que lo adecuado sea optar por una solución intermedia utilizando Node-RED para ciertas tareas como el envío de notificaciones y el backoffice para visualizar o configurar ciertas opciones, o puede que Node-RED se muestre poco ventajoso y se opte por una implementación completamente propia. Son incertidumbres que resolverá la experimentación y la formación.
+Node-RED es un motor de flujos con enfoque IoT, que permite definir gráficamente flujos de servicios. Aún no está claro cuánto brinda Node-RED con respecto a una implementación propia. Por ello, aún no está claro cuánta parte de trabajo caerá sobre Node-RED y cuánta sobre el servidor web propio. Si Node-RED brindase toda la potencia y flexibilidad necesarias (ya que puede incluso producir APIs y escribir en base de datos) el servidor web podría llegar a desaparecer. O quizá se descubra que lo adecuado sea optar por una solución intermedia utilizando Node-RED para ciertas tareas como el envío de notificaciones y el backoffice para visualizar datos, configurar opciones o gestionar permisos... o puede que Node-RED se muestre poco ventajoso y se opte por una implementación completamente propia. Son incertidumbres que resolverá la experimentación y la formación.
 
 ![](doc/resources/nodered.png)
 
@@ -53,7 +53,7 @@ MQTT es un protocolo muy ligero. La naturaleza de los proyectos IoT se basa en u
 
 ![](doc/resources/interaccion.drawio.png)
 
-Los clientes pueden atacar al backoffice para listar los dispositivos o tópicos disponibles para suscribirse, pero los datos en sí serán transmitidos directamente por MQTT. Por defecto, se recibirán numerosos mensajes por segundo, multiplicados por cada dispositivo. Involucrar de alguna manera al protocolo HTTP o consultas a la base de datos por cada una de estas peticiones sería altamente ineficiente, por lo que estas interacciones deben estudiarse bien.
+Los clientes pueden atacar al backoffice para listar los dispositivos o tópicos disponibles para suscribirse, pero los datos en sí serán transmitidos directamente por MQTT. Por defecto, se recibirán numerosos mensajes por segundo, multiplicados por cada dispositivo. Involucrar de alguna manera al protocolo HTTP o consultas a la base de datos por cada una de estas peticiones sería altamente ineficiente, por lo que estas interacciones deben estudiarse bien. MQTT ofrece mecanismos de autenticación y existen librerías para todos los tipos de clientes en todos los lenguajes. No hay motivos para pasar por el servidor en la comunicación MQTT a menos que se trate de una situación puntual especial.
 
 
 ## Tecnologías empleadas
