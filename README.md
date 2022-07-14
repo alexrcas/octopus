@@ -1,6 +1,6 @@
 # Octopus
 
-Octopus es un sistema de monitorización y comunicación entre dispositivos inteligentes.
+Octopus es un ecosistema de monitorización y comunicación entre dispositivos inteligentes.
 
 ## Descripción del proyecto
 
@@ -23,9 +23,11 @@ De manera interna, Octopus está compuesto por diferentes sistemas contenerizado
 
 ![arquitectura](doc/resources/arquitectura.png)
 
-### Node-Red vs Servidor Web propio
+### Consideraciones sobre Octopus, Node-RED y el servidor web
 
-Node-RED es un motor de flujos con enfoque IoT, que permite definir gráficamente flujos de servicios Es de código abierto y posee integraciones con todo tipo de sistemas y servicios. Aún no está claro cuánto brinda Node-RED con respecto a una implementación propia. Por ello, aún no está claro cuánta parte de trabajo caerá sobre Node-RED y cuánta sobre el servidor web propio. Si Node-RED brindase toda la potencia y flexibilidad necesarias (ya que puede incluso producir APIs y escribir en base de datos) el servidor web podría llegar a desaparecer. O quizá se descubra que lo adecuado sea optar por una solución intermedia utilizando Node-RED para ciertas tareas como el envío de notificaciones y el backoffice para visualizar datos, configurar opciones o gestionar permisos... o puede que Node-RED se muestre poco ventajoso y se opte por una implementación completamente propia. Son incertidumbres que resolverá la experimentación y la formación.
+Node-RED es un motor de flujos con enfoque IoT, que permite definir gráficamente flujos de servicios Es de código abierto y posee integraciones con todo tipo de sistemas y servicios. Dispone de una comunidad enorme y muy activa que contribuuye creando nodos para todas las funciones imaginables. Aunque probablemente no sea la mejor práctica, es posible montar una API, un servidor web e incluso una base de datos solo utilizando Node-RED de forma bastante intuitiva e inmediata.
+
+Octopus solamente es un ecosistema que ofrece todas las herramientas comunes preinstaladas, desplegadas e interconectadas, pero ello no quiere decir que sea obligatorio o necesario el uso de todas ellas. Puede que en un determinado proyecto algunos módulos como el servidor web o la base de datos sean prescindibles. En este caso basta con no utilizarlos o simplemente eliminarlos del despliegue.
 
 ![](doc/resources/nodered.png)
 
